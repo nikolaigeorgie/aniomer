@@ -6,6 +6,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { Logo } from "@/components/logo";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -30,13 +31,8 @@ export default function DashboardPage() {
       <nav className="border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M4 8l8-6 8 6v12l-8 6-8-6V8z" />
-                </svg>
-              </div>
-              <span className="font-bold">Aniomer</span>
+            <Link href="/">
+              <Logo width={100} height={40} />
             </Link>
 
             <div className="flex items-center gap-4">

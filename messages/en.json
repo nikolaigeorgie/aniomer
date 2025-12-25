@@ -3,8 +3,8 @@
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signOut": "Sign Out",
-    "getStarted": "Get Started",
-    "dashboard": "Dashboard",
+    "getStarted": "Start Learning",
+    "dashboard": "My Courses",
     "courses": "Courses",
     "settings": "Settings",
     "loading": "Loading...",
@@ -20,78 +20,87 @@
     "language": "Language"
   },
   "landing": {
-    "badge": "Now with Next.js 16 & React 19",
+    "badge": "500+ Students Learning Successfully",
     "learnHebrew": "I want to learn Hebrew",
     "learnEnglish": "I want to learn English",
-    "headline": "Build Video Courses",
-    "headlineHighlight": "That Captivate",
-    "subheadline": "A modern, open-source video course platform. Create beautiful learning experiences with HD video, progress tracking, and a stunning interface.",
-    "startCreating": "Start Creating",
-    "viewOnGithub": "View on GitHub",
-    "builtWith": "Built with modern technologies",
-    "readyToStart": "Ready to Get Started?",
-    "readyDescription": "Join creators who are building the future of online education. Create your free account and start building in minutes.",
-    "createFreeAccount": "Create Free Account",
+    "headline": "Master a New Language",
+    "headlineHighlight": "The Fun Way",
+    "subheadline": "Forget boring textbooks. Learn Hebrew or English through engaging video lessons, interactive exercises, and personalized feedback. Real conversations, real progress.",
+    "startCreating": "Start Learning Free",
+    "viewOnGithub": "Watch Demo",
+    "builtWith": "Trusted by learners worldwide",
+    "readyToStart": "Ready to Start Your Journey?",
+    "readyDescription": "Join hundreds of students who've transformed their language skills with our unique approach. Your first lesson is free—no credit card required.",
+    "createFreeAccount": "Get Your Free Lesson",
+    "instructor": {
+      "label": "Your Instructor",
+      "name": "Aviya",
+      "bio": "Language expert with a passion for making learning enjoyable. My unique methods focus on real-world conversation, not just grammar rules.",
+      "online": "Online",
+      "students": "Students",
+      "rating": "Rating",
+      "lessons": "Lessons"
+    },
     "footer": {
-      "documentation": "Documentation",
-      "github": "GitHub",
-      "support": "Support",
-      "copyright": "© {year} Aniomer. Open Source."
+      "documentation": "How It Works",
+      "github": "About Aviya",
+      "support": "Contact",
+      "copyright": "© {year} Aviya Languages. All rights reserved."
     }
   },
   "features": {
-    "title": "Everything You Need",
-    "subtitle": "A complete toolkit for creating and delivering professional video courses",
+    "title": "Why Learn With Aviya?",
+    "subtitle": "A fresh approach to language learning designed for real results",
     "videoStreaming": {
-      "title": "HD Video Streaming",
-      "description": "Crystal-clear video delivery powered by Mux. Adaptive bitrate ensures smooth playback on any device."
+      "title": "Bite-Sized Video Lessons",
+      "description": "HD video lessons you can watch anytime. Learn at your own pace with clear explanations and native pronunciation."
     },
     "security": {
-      "title": "Secure & Private",
-      "description": "Enterprise-grade security with signed URLs and DRM protection. Your content stays protected."
+      "title": "Personalized Learning Path",
+      "description": "Not a one-size-fits-all approach. Courses tailored to your level, goals, and learning style."
     },
     "performance": {
-      "title": "Lightning Fast",
-      "description": "Built on Next.js 16 with Turbopack. Instant page loads and seamless navigation throughout."
+      "title": "Real Conversation Skills",
+      "description": "Focus on practical, everyday language you'll actually use. Start speaking from day one."
     },
     "ui": {
-      "title": "Beautiful UI",
-      "description": "Thoughtfully designed interface with smooth animations. Dark mode that's easy on the eyes."
+      "title": "Engaging & Enjoyable",
+      "description": "Interactive exercises, quizzes, and challenges that make learning fun—not a chore."
     },
     "progress": {
-      "title": "Track Progress",
-      "description": "Students can track their learning journey. See completion rates and pick up where you left off."
+      "title": "Track Your Progress",
+      "description": "See how far you've come with detailed progress tracking. Celebrate milestones and stay motivated."
     },
     "customizable": {
-      "title": "Fully Customizable",
-      "description": "Open source and extensible. Modify styles, add features, or integrate with your existing tools."
+      "title": "Test Your Knowledge",
+      "description": "Regular assessments to reinforce learning. Know exactly where you stand and what to focus on next."
     }
   },
   "auth": {
     "welcomeBack": "Welcome back",
-    "signInDescription": "Sign in to your account to continue",
-    "createAccount": "Create your account",
-    "signUpDescription": "Start creating amazing video courses today",
+    "signInDescription": "Continue your language learning journey",
+    "createAccount": "Start your free trial",
+    "signUpDescription": "Begin your language learning adventure today",
     "email": "Email address",
     "emailPlaceholder": "you@example.com",
     "password": "Password",
     "passwordPlaceholder": "••••••••",
     "confirmPassword": "Confirm password",
     "fullName": "Full name",
-    "fullNamePlaceholder": "John Doe",
+    "fullNamePlaceholder": "Your name",
     "forgotPassword": "Forgot password?",
-    "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?",
+    "noAccount": "New here?",
+    "hasAccount": "Already learning with us?",
     "signingIn": "Signing in...",
-    "creatingAccount": "Creating account...",
+    "creatingAccount": "Creating your account...",
     "backToHome": "Back to home",
     "passwordHint": "Must be at least 6 characters"
   },
   "dashboard": {
-    "welcome": "Welcome, {name}!",
+    "welcome": "Welcome back, {name}!",
     "yourCourses": "Your Courses",
-    "noCourses": "You haven't created any courses yet.",
-    "createFirst": "Create your first course",
+    "noCourses": "You haven't started any courses yet.",
+    "createFirst": "Browse our courses",
     "recentActivity": "Recent Activity",
     "noActivity": "No recent activity"
   },
@@ -101,10 +110,72 @@
     "dark": "Dark",
     "system": "System"
   },
+  "testimonials": {
+    "titleHighlight": "Students",
+    "title": "Love Learning With Us",
+    "description": "Join hundreds of happy students who've transformed their language skills with Aviya's unique teaching approach. Real results, real conversations.",
+    "features": {
+      "0": "Learn through real conversations, not textbooks",
+      "1": "Personalized feedback on your pronunciation",
+      "2": "Progress at your own pace with bite-sized lessons",
+      "3": "Interactive exercises that make learning fun"
+    },
+    "cta": "Join Our Students",
+    "rating": "Average Rating",
+    "quotes": {
+      "0": {
+        "text": "I never thought I could learn Hebrew so quickly! Aviya's method is unlike anything I've tried before. After just 2 months, I can hold basic conversations.",
+        "name": "Sarah M.",
+        "role": "Learning Hebrew"
+      },
+      "1": {
+        "text": "The lessons are so engaging that I actually look forward to studying. The progress tracking keeps me motivated, and the feedback is incredibly helpful.",
+        "name": "David K.",
+        "role": "Learning English"
+      },
+      "2": {
+        "text": "Finally, a language course that focuses on real conversation skills! I've tried many apps before, but this is the first time I feel like I'm actually making progress.",
+        "name": "Maya R.",
+        "role": "Learning Hebrew"
+      }
+    }
+  },
+  "faq": {
+    "titleStart": "Frequently",
+    "titleHighlight": "Asked",
+    "titleEnd": "Questions",
+    "description": "Everything you need to know about learning with Aviya. Can't find what you're looking for? Feel free to contact us.",
+    "stillHaveQuestions": "Still have questions?",
+    "contactUs": "Contact us directly",
+    "items": {
+      "0": {
+        "question": "How long does it take to become conversational?",
+        "answer": "Most students start having basic conversations within 2-3 months of consistent practice. Our method focuses on practical, everyday language from day one, so you'll be speaking sooner than you think. The key is regular practice—even 15-20 minutes daily can lead to significant progress."
+      },
+      "1": {
+        "question": "Do I need any prior knowledge to start?",
+        "answer": "Not at all! Our courses are designed for complete beginners as well as intermediate learners. We'll assess your current level and create a personalized learning path that matches your goals and experience."
+      },
+      "2": {
+        "question": "What makes Aviya's method different from apps like Duolingo?",
+        "answer": "Unlike gamified apps that focus on translation exercises, our courses emphasize real conversation skills, proper pronunciation, and cultural context. You'll learn from a native speaker who provides personalized feedback, not just automated responses. Our video lessons let you see facial expressions and mouth movements, which is crucial for proper pronunciation."
+      },
+      "3": {
+        "question": "Can I learn at my own pace?",
+        "answer": "Absolutely! All lessons are pre-recorded and available 24/7, so you can learn whenever it fits your schedule. Whether you prefer intensive daily sessions or a more relaxed pace, our platform adapts to your lifestyle."
+      },
+      "4": {
+        "question": "Is there a free trial available?",
+        "answer": "Yes! Your first lesson is completely free with no credit card required. This gives you a chance to experience our teaching style and see if it's the right fit for you before committing to a full course."
+      },
+      "5": {
+        "question": "What if I get stuck or need extra help?",
+        "answer": "We're here to support you! You can reach out directly for clarification on any lesson, and we offer personalized feedback on your progress. Our community of learners also provides a supportive environment where you can practice and ask questions."
+      }
+    }
+  },
   "metadata": {
-    "title": "Aniomer | Modern Video Course Platform",
-    "description": "Create and share beautiful video courses with ease. A modern platform built for creators, powered by cutting-edge technology."
+    "title": "Learn Hebrew & English with Aviya | Language Courses",
+    "description": "Master Hebrew or English with Aviya's unique video courses. Engaging lessons, real conversation practice, and personalized learning paths. Start your free trial today."
   }
 }
-
-

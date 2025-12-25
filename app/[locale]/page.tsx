@@ -2,11 +2,15 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { LanguageLearningSelector } from "@/components/language-learning-selector";
+import { Testimonials } from "@/components/Testimonials";
+import { FAQ } from "@/components/FAQ";
+import { Logo } from "@/components/logo";
 
 const featureIcons = {
   videoStreaming: (
@@ -43,13 +47,12 @@ const featureIcons = {
 
 const featureKeys = ["videoStreaming", "security", "performance", "ui", "progress", "customizable"] as const;
 
-const techStack = [
-  { name: "Next.js 16", color: "from-white to-gray-400" },
-  { name: "React 19", color: "from-cyan-400 to-blue-500" },
-  { name: "TypeScript", color: "from-blue-400 to-blue-600" },
-  { name: "Tailwind CSS", color: "from-cyan-400 to-teal-500" },
-  { name: "Prisma", color: "from-indigo-400 to-purple-500" },
-  { name: "Mux Video", color: "from-pink-400 to-rose-500" },
+const trustIndicators = [
+  { name: "500+ Students", color: "from-amber-400 to-orange-500" },
+  { name: "4.9★ Rating", color: "from-yellow-400 to-amber-500" },
+  { name: "50+ Lessons", color: "from-green-400 to-emerald-500" },
+  { name: "Native Speaker", color: "from-blue-400 to-indigo-500" },
+  { name: "Certified", color: "from-purple-400 to-violet-500" },
 ];
 
 export default function LandingPage() {
@@ -73,14 +76,9 @@ export default function LandingPage() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-3"
+              className="flex items-center"
             >
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <svg className="w-5 h-5 text-primary-foreground" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M4 8l8-6 8 6v12l-8 6-8-6V8z" />
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-tight">Aniomer</span>
+              <Logo width={140} height={56} />
             </motion.div>
 
             <motion.div
@@ -122,9 +120,57 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-16 pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="relative z-10 pt-12 pb-32 overflow-hidden">
+        {/* Instructor Image - Absolute positioned behind content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute top-0 end-0 w-[55%] lg:w-[45%] h-[800px] pointer-events-none hidden sm:block"
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src="/images/aviya.png"
+              alt=""
+              fill
+              sizes="45vw"
+              className="object-cover object-[center_15%] dark:mix-blend-screen"
+              priority
+            />
+          </div>
+          {/* Gradient fade on the text side */}
+          <div className="absolute inset-0 bg-gradient-to-l rtl:bg-gradient-to-r from-transparent via-transparent to-background" />
+          {/* Top fade */}
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+          {/* Bottom fade - smooth and gradual */}
+          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent" />
+          
+          {/* Instructor badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="absolute bottom-40 end-8 lg:end-20 bg-card/90 backdrop-blur-md border border-border rounded-2xl px-5 py-3 shadow-xl pointer-events-auto"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm font-medium">{t("instructor.name")}</span>
+              </div>
+              <div className="w-px h-4 bg-border" />
+              <div className="flex items-center gap-1">
+                <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span className="text-sm font-bold">4.9</span>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          {/* Hero Content */}
+          <div className="max-w-2xl text-center lg:text-start">
             {/* Language Learning Selector */}
             <LanguageLearningSelector />
 
@@ -182,17 +228,15 @@ export default function LandingPage() {
                 <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
 
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => {/* TODO: Open demo video modal */}}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl border border-border text-foreground font-semibold text-lg hover:bg-muted transition-colors flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  <path d="M8 5v14l11-7z" />
                 </svg>
                 {t("viewOnGithub")}
-              </a>
+              </button>
             </motion.div>
 
             {/* Tech Stack */}
@@ -200,11 +244,11 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-16"
+              className="mt-12"
             >
               <p className="text-sm text-muted-foreground mb-4">{t("builtWith")}</p>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                {techStack.map((tech, i) => (
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                {trustIndicators.map((tech, i) => (
                   <motion.span
                     key={tech.name}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -218,56 +262,6 @@ export default function LandingPage() {
               </div>
             </motion.div>
           </div>
-
-          {/* Hero Visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-20 relative"
-          >
-            <div className="relative rounded-2xl overflow-hidden gradient-border">
-              <div className="aspect-video bg-gradient-to-br from-card to-card/50 rounded-2xl p-8 flex items-center justify-center">
-                <div className="w-full max-w-4xl">
-                  <div className="flex gap-6">
-                    <div className="flex-1">
-                      <div className="aspect-video rounded-xl bg-black/50 relative overflow-hidden">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center pulse-ring">
-                            <svg className="w-10 h-10 text-primary ms-1" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="absolute bottom-0 inset-x-0 p-4">
-                          <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-                            <div className="h-full w-1/3 bg-primary rounded-full" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="hidden lg:block w-72 space-y-2">
-                      {[1, 2, 3, 4].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`p-3 rounded-lg ${i === 0 ? "bg-primary/20 border border-primary/30" : "bg-white/5"} flex gap-3 items-center`}
-                        >
-                          <div className="w-10 h-10 rounded bg-black/30 flex items-center justify-center text-xs font-mono">
-                            {String(i + 1).padStart(2, "0")}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className={`h-2.5 ${i === 0 ? "bg-white/40" : "bg-white/20"} rounded w-3/4`} />
-                            <div className={`h-2 ${i === 0 ? "bg-white/20" : "bg-white/10"} rounded w-1/2 mt-1.5`} />
-                          </div>
-                          {i === 0 && <div className="w-2 h-2 rounded-full bg-primary" />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
@@ -312,6 +306,12 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* FAQ Section */}
+      <FAQ />
+
       {/* CTA Section */}
       <section className="relative z-10 py-32">
         <div className="max-w-4xl mx-auto px-6">
@@ -349,14 +349,7 @@ export default function LandingPage() {
       <footer className="relative z-10 py-12 border-t border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <svg className="w-4 h-4 text-primary-foreground" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M4 8l8-6 8 6v12l-8 6-8-6V8z" />
-                </svg>
-              </div>
-              <span className="font-semibold">Aniomer</span>
-            </div>
+            <Logo width={100} height={40} />
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">{t("footer.documentation")}</a>
               <a href="#" className="hover:text-foreground transition-colors">{t("footer.github")}</a>

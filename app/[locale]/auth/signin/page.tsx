@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { Logo } from "@/components/logo";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -60,13 +61,8 @@ export default function SignInPage() {
         className="relative z-10 w-full max-w-md"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M4 8l8-6 8 6v12l-8 6-8-6V8z" />
-            </svg>
-          </div>
-          <span className="text-xl font-bold tracking-tight">Aniomer</span>
+        <Link href="/" className="flex items-center justify-center mb-8">
+          <Logo width={160} height={64} />
         </Link>
 
         {/* Card */}
