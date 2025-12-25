@@ -140,6 +140,104 @@
       }
     }
   },
+  "interactiveFeatures": {
+    "titleStart": "The",
+    "titleHighlight": "Learning",
+    "titleEnd": "Experience",
+    "description": "Experience language learning like never before. Our interactive platform combines conversation practice, personalized paths, and progress tracking to accelerate your fluency.",
+    "conversation": {
+      "title": "Real Conversation Practice",
+      "description": "Practice speaking with our AI tutor or join live sessions with Aviya. Get instant feedback on pronunciation and grammar.",
+      "placeholder": "Practice your response...",
+      "messages": {
+        "0": "שלום! מה שלומך היום? (Hello! How are you today?)",
+        "1": "אני בסדר, תודה! אני לומד עברית. (I'm fine, thanks! I'm learning Hebrew.)",
+        "2": "מצוין! ההגייה שלך מתפתחת יפה. בואו נתרגל עוד. (Excellent! Your pronunciation is developing nicely. Let's practice more.)"
+      }
+    },
+    "paths": {
+      "title": "Personalized Learning Paths",
+      "description": "Choose your path based on your goals. Whether you're a complete beginner or looking to achieve fluency, we have a course for you.",
+      "heading": "Your Journey",
+      "subheading": "Tailored for Your Goals",
+      "levels": {
+        "0": {
+          "name": "Fluent Speaker Course",
+          "level": "Advanced",
+          "content": "Master Complex Conversations"
+        },
+        "1": {
+          "name": "Confident Speaker Course",
+          "level": "Intermediate",
+          "content": "Build Real-World Skills"
+        },
+        "2": {
+          "name": "First Steps Course",
+          "level": "Beginner",
+          "content": "Start Speaking Day One"
+        }
+      }
+    },
+    "progress": {
+      "title": "Track Your Progress",
+      "description": "Stay motivated with detailed progress tracking. See your streak, completed lessons, and areas to improve at a glance.",
+      "thisWeek": "This Week's Streak",
+      "currentLesson": "Continue",
+      "lessonTitle": "Greetings & Introductions",
+      "lessonDescription": "Learn essential phrases for meeting new people and making a great first impression.",
+      "progress": "Progress",
+      "minutesLeft": "min left",
+      "continue": "Resume"
+    }
+  },
+  "pricing": {
+    "titleHighlight": "Simple",
+    "title": "Pricing for Everyone",
+    "description": "Choose the plan that fits your learning goals. Start with a free trial and upgrade anytime.",
+    "period": "month",
+    "guarantee": "30-day money-back guarantee. No questions asked.",
+    "securePayment": "Secure payment",
+    "cancelAnytime": "Cancel anytime",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for trying out our method",
+      "cta": "Start Free Trial",
+      "features": {
+        "0": "Access to beginner lessons",
+        "1": "10 video lessons per month",
+        "2": "Basic progress tracking",
+        "3": "Email support",
+        "4": "Mobile app access"
+      }
+    },
+    "premium": {
+      "name": "Premium",
+      "description": "Our most popular plan for serious learners",
+      "cta": "Get Premium",
+      "features": {
+        "0": "Unlimited video lessons",
+        "1": "All beginner & intermediate content",
+        "2": "Personalized learning path",
+        "3": "Pronunciation feedback",
+        "4": "Weekly live Q&A sessions",
+        "5": "Priority support",
+        "6": "Downloadable resources"
+      }
+    },
+    "complete": {
+      "name": "Complete",
+      "description": "Everything you need for fluency",
+      "cta": "Go Complete",
+      "features": {
+        "0": "Everything in Premium",
+        "1": "Advanced & specialized courses",
+        "2": "1-on-1 monthly coaching call",
+        "3": "Custom study plan",
+        "4": "Certificate of completion",
+        "5": "Lifetime access to purchased content"
+      }
+    }
+  },
   "faq": {
     "titleStart": "Frequently",
     "titleHighlight": "Asked",

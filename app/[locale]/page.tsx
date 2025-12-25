@@ -10,6 +10,8 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { LanguageLearningSelector } from "@/components/language-learning-selector";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
+import { Pricing } from "@/components/Pricing";
+import { InteractiveFeatures } from "@/components/InteractiveFeatures";
 import { Logo } from "@/components/logo";
 
 const featureIcons = {
@@ -306,8 +308,14 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Interactive Features Section */}
+      <InteractiveFeatures />
+
       {/* Testimonials Section */}
       <Testimonials />
+
+      {/* Pricing Section */}
+      <Pricing />
 
       {/* FAQ Section */}
       <FAQ />
