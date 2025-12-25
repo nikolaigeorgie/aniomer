@@ -1,0 +1,110 @@
+{
+  "common": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "settings": "Settings",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "language": "Language"
+  },
+  "landing": {
+    "badge": "Now with Next.js 16 & React 19",
+    "learnHebrew": "I want to learn Hebrew",
+    "learnEnglish": "I want to learn English",
+    "headline": "Build Video Courses",
+    "headlineHighlight": "That Captivate",
+    "subheadline": "A modern, open-source video course platform. Create beautiful learning experiences with HD video, progress tracking, and a stunning interface.",
+    "startCreating": "Start Creating",
+    "viewOnGithub": "View on GitHub",
+    "builtWith": "Built with modern technologies",
+    "readyToStart": "Ready to Get Started?",
+    "readyDescription": "Join creators who are building the future of online education. Create your free account and start building in minutes.",
+    "createFreeAccount": "Create Free Account",
+    "footer": {
+      "documentation": "Documentation",
+      "github": "GitHub",
+      "support": "Support",
+      "copyright": "© {year} Aniomer. Open Source."
+    }
+  },
+  "features": {
+    "title": "Everything You Need",
+    "subtitle": "A complete toolkit for creating and delivering professional video courses",
+    "videoStreaming": {
+      "title": "HD Video Streaming",
+      "description": "Crystal-clear video delivery powered by Mux. Adaptive bitrate ensures smooth playback on any device."
+    },
+    "security": {
+      "title": "Secure & Private",
+      "description": "Enterprise-grade security with signed URLs and DRM protection. Your content stays protected."
+    },
+    "performance": {
+      "title": "Lightning Fast",
+      "description": "Built on Next.js 16 with Turbopack. Instant page loads and seamless navigation throughout."
+    },
+    "ui": {
+      "title": "Beautiful UI",
+      "description": "Thoughtfully designed interface with smooth animations. Dark mode that's easy on the eyes."
+    },
+    "progress": {
+      "title": "Track Progress",
+      "description": "Students can track their learning journey. See completion rates and pick up where you left off."
+    },
+    "customizable": {
+      "title": "Fully Customizable",
+      "description": "Open source and extensible. Modify styles, add features, or integrate with your existing tools."
+    }
+  },
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "signInDescription": "Sign in to your account to continue",
+    "createAccount": "Create your account",
+    "signUpDescription": "Start creating amazing video courses today",
+    "email": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Confirm password",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "John Doe",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signingIn": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "backToHome": "Back to home",
+    "passwordHint": "Must be at least 6 characters"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}!",
+    "yourCourses": "Your Courses",
+    "noCourses": "You haven't created any courses yet.",
+    "createFirst": "Create your first course",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No recent activity"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "metadata": {
+    "title": "Aniomer | Modern Video Course Platform",
+    "description": "Create and share beautiful video courses with ease. A modern platform built for creators, powered by cutting-edge technology."
+  }
+}
+
+

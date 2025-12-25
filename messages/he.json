@@ -1,0 +1,110 @@
+{
+  "common": {
+    "signIn": "התחברות",
+    "signUp": "הרשמה",
+    "signOut": "התנתקות",
+    "getStarted": "התחל עכשיו",
+    "dashboard": "לוח בקרה",
+    "courses": "קורסים",
+    "settings": "הגדרות",
+    "loading": "טוען...",
+    "save": "שמור",
+    "cancel": "ביטול",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "create": "צור",
+    "back": "חזור",
+    "next": "הבא",
+    "previous": "הקודם",
+    "submit": "שלח",
+    "language": "שפה"
+  },
+  "landing": {
+    "badge": "עכשיו עם Next.js 16 ו-React 19",
+    "learnHebrew": "אני רוצה ללמוד עברית",
+    "learnEnglish": "אני רוצה ללמוד אנגלית",
+    "headline": "בנה קורסי וידאו",
+    "headlineHighlight": "שמרתקים",
+    "subheadline": "פלטפורמת קורסי וידאו מודרנית וקוד פתוח. צור חוויות למידה מרהיבות עם וידאו באיכות HD, מעקב התקדמות וממשק מדהים.",
+    "startCreating": "התחל ליצור",
+    "viewOnGithub": "צפה ב-GitHub",
+    "builtWith": "בנוי עם טכנולוגיות מודרניות",
+    "readyToStart": "מוכן להתחיל?",
+    "readyDescription": "הצטרף ליוצרים שבונים את עתיד החינוך המקוון. צור חשבון חינם והתחל לבנות תוך דקות.",
+    "createFreeAccount": "צור חשבון חינם",
+    "footer": {
+      "documentation": "תיעוד",
+      "github": "GitHub",
+      "support": "תמיכה",
+      "copyright": "© {year} Aniomer. קוד פתוח."
+    }
+  },
+  "features": {
+    "title": "כל מה שאתה צריך",
+    "subtitle": "ערכת כלים מלאה ליצירה ואספקה של קורסי וידאו מקצועיים",
+    "videoStreaming": {
+      "title": "הזרמת וידאו HD",
+      "description": "העברת וידאו באיכות קריסטל מופעלת על ידי Mux. קצב סיביות אדפטיבי מבטיח הפעלה חלקה בכל מכשיר."
+    },
+    "security": {
+      "title": "מאובטח ופרטי",
+      "description": "אבטחה ברמת ארגון עם כתובות URL חתומות והגנת DRM. התוכן שלך נשאר מוגן."
+    },
+    "performance": {
+      "title": "מהיר כברק",
+      "description": "בנוי על Next.js 16 עם Turbopack. טעינת דפים מיידית וניווט חלק לאורך כל הדרך."
+    },
+    "ui": {
+      "title": "ממשק יפהפה",
+      "description": "ממשק מעוצב בקפידה עם אנימציות חלקות. מצב כהה שנוח לעיניים."
+    },
+    "progress": {
+      "title": "מעקב התקדמות",
+      "description": "תלמידים יכולים לעקוב אחר מסע הלמידה שלהם. צפה בשיעורי השלמה והמשך מהיכן שהפסקת."
+    },
+    "customizable": {
+      "title": "ניתן להתאמה מלאה",
+      "description": "קוד פתוח וניתן להרחבה. שנה סגנונות, הוסף תכונות או שלב עם הכלים הקיימים שלך."
+    }
+  },
+  "auth": {
+    "welcomeBack": "ברוך שובך",
+    "signInDescription": "התחבר לחשבון שלך כדי להמשיך",
+    "createAccount": "צור את החשבון שלך",
+    "signUpDescription": "התחל ליצור קורסי וידאו מדהימים היום",
+    "email": "כתובת אימייל",
+    "emailPlaceholder": "you@example.com",
+    "password": "סיסמה",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "אימות סיסמה",
+    "fullName": "שם מלא",
+    "fullNamePlaceholder": "ישראל ישראלי",
+    "forgotPassword": "שכחת סיסמה?",
+    "noAccount": "אין לך חשבון?",
+    "hasAccount": "כבר יש לך חשבון?",
+    "signingIn": "מתחבר...",
+    "creatingAccount": "יוצר חשבון...",
+    "backToHome": "חזרה לדף הבית",
+    "passwordHint": "לפחות 6 תווים"
+  },
+  "dashboard": {
+    "welcome": "ברוך הבא, {name}!",
+    "yourCourses": "הקורסים שלך",
+    "noCourses": "עדיין לא יצרת קורסים.",
+    "createFirst": "צור את הקורס הראשון שלך",
+    "recentActivity": "פעילות אחרונה",
+    "noActivity": "אין פעילות אחרונה"
+  },
+  "theme": {
+    "toggle": "החלף ערכת נושא",
+    "light": "בהיר",
+    "dark": "כהה",
+    "system": "מערכת"
+  },
+  "metadata": {
+    "title": "Aniomer | פלטפורמת קורסי וידאו מודרנית",
+    "description": "צור ושתף קורסי וידאו יפים בקלות. פלטפורמה מודרנית שנבנתה ליוצרים, מופעלת על ידי טכנולוגיה חדשנית."
+  }
+}
+
+

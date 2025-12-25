@@ -4,5 +4,5 @@
 
 /* Legacy styles for pages directory routes */
 body {
-  @apply antialiased;
+  @apply antialiased bg-background text-foreground;
 }

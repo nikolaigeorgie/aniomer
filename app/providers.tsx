@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -19,36 +20,41 @@ export function Providers({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <SessionProvider>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            className:
-              "!bg-[rgb(18,18,24)] !text-white !border !border-violet-500/20",
-            duration: 4000,
-            style: {
-              background: "rgb(18, 18, 24)",
-              color: "#fff",
-              border: "1px solid rgba(139, 92, 246, 0.2)",
-            },
-            success: {
-              iconTheme: {
-                primary: "#8B5CF6",
-                secondary: "#fff",
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <SessionProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              className: "!bg-popover !text-popover-foreground !border !border-border",
+              duration: 4000,
+              style: {
+                background: "hsl(var(--popover))",
+                color: "hsl(var(--popover-foreground))",
+                border: "1px solid hsl(var(--border))",
               },
-            },
-            error: {
-              iconTheme: {
-                primary: "#EF4444",
-                secondary: "#fff",
+              success: {
+                iconTheme: {
+                  primary: "hsl(var(--primary))",
+                  secondary: "hsl(var(--primary-foreground))",
+                },
               },
-            },
-          }}
-        />
-      </QueryClientProvider>
-    </SessionProvider>
+              error: {
+                iconTheme: {
+                  primary: "hsl(0 84.2% 60.2%)",
+                  secondary: "hsl(var(--destructive-foreground))",
+                },
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </SessionProvider>
+    </ThemeProvider>
   );
 }
-
