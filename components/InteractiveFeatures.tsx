@@ -417,11 +417,39 @@ export function InteractiveFeatures() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Desktop: 3 columns, Tablet: 2 columns with stats below, Mobile: 1 column */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ConversationSection t={t} />
           <LearningPathsSection t={t} />
           <ProgressSection t={t} />
         </div>
+
+        {/* Stats row - shows on tablet to fill space */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {[
+            { value: "500+", label: t("stats.students") },
+            { value: "50+", label: t("stats.lessons") },
+            { value: "5.0", label: t("stats.rating") },
+            { value: "95%", label: t("stats.completion") },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              className="text-center p-6 rounded-2xl bg-card/50 border border-border"
+            >
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+                {stat.value}
+              </div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

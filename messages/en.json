@@ -5,7 +5,9 @@
     "signOut": "Sign Out",
     "getStarted": "Start Learning",
     "dashboard": "My Courses",
+    "home": "Home",
     "courses": "Courses",
+    "about": "About",
     "settings": "Settings",
     "loading": "Loading...",
     "save": "Save",
@@ -28,7 +30,13 @@
     "subheadline": "Forget boring textbooks. Learn Hebrew or English through engaging video lessons, interactive exercises, and personalized feedback. Real conversations, real progress.",
     "startCreating": "Start Learning Free",
     "viewOnGithub": "Watch Demo",
-    "builtWith": "Trusted by learners worldwide",
+    "trust": {
+      "students": "500+ Students",
+      "rating": "5.0★ Rating",
+      "lessons": "50+ Lessons",
+      "native": "Native Speaker",
+      "certified": "Certified"
+    },
     "readyToStart": "Ready to Start Your Journey?",
     "readyDescription": "Join hundreds of students who've transformed their language skills with our unique approach. Your first lesson is free—no credit card required.",
     "createFreeAccount": "Get Your Free Lesson",
@@ -188,6 +196,12 @@
       "progress": "Progress",
       "minutesLeft": "min left",
       "continue": "Resume"
+    },
+    "stats": {
+      "students": "Happy Students",
+      "lessons": "Video Lessons",
+      "rating": "Average Rating",
+      "completion": "Completion Rate"
     }
   },
   "pricing": {

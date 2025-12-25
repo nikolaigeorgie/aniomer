@@ -1,10 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { LanguageLearningSelector } from "@/components/language-learning-selector";
@@ -49,19 +52,23 @@ const featureIcons = {
 
 const featureKeys = ["videoStreaming", "security", "performance", "ui", "progress", "customizable"] as const;
 
-const trustIndicators = [
-  { name: "500+ Students", color: "from-amber-400 to-orange-500" },
-  { name: "4.9★ Rating", color: "from-yellow-400 to-amber-500" },
-  { name: "50+ Lessons", color: "from-green-400 to-emerald-500" },
-  { name: "Native Speaker", color: "from-blue-400 to-indigo-500" },
-  { name: "Certified", color: "from-purple-400 to-violet-500" },
-];
+const trustIndicatorKeys = ["students", "rating", "lessons", "native", "certified"] as const;
 
 export default function LandingPage() {
   const { data: session, status } = useSession();
   const t = useTranslations("landing");
   const tCommon = useTranslations("common");
   const tFeatures = useTranslations("features");
+  
+  // Scroll detection for navbar transformation
+  const navRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setScrolled(latest > 50);
+  });
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -70,56 +77,194 @@ export default function LandingPage() {
       <div className="hero-glow -top-40 start-[-10rem]" />
       <div className="hero-glow -bottom-40 end-[-10rem]" />
 
-      {/* Navigation */}
-      <nav className="relative z-50">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <Logo width={140} height={56} />
-            </motion.div>
+      {/* Sticky Navigation */}
+      <motion.nav 
+        ref={navRef}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 inset-x-0 z-50"
+      >
+        {/* Desktop Nav */}
+        <motion.div
+          animate={{
+            width: scrolled ? "90%" : "100%",
+            y: scrolled ? 12 : 0,
+            borderRadius: scrolled ? "9999px" : "0px",
+          }}
+          transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+          className={cn(
+            "hidden md:flex items-center justify-between mx-auto px-6 py-4 transition-all duration-300",
+            scrolled
+              ? "bg-background/85 backdrop-blur-xl shadow-lg shadow-foreground/5 border border-border/50"
+              : "bg-transparent"
+          )}
+        >
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className="flex items-center"
+          >
+            <Link href="/" className="flex items-center gap-3">
+              <Logo width={scrolled ? 100 : 140} height={scrolled ? 40 : 56} />
+            </Link>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-2"
-            >
+          {/* Center Nav Links */}
+          <motion.div 
+            className="flex items-center gap-1"
+            animate={{ opacity: scrolled ? 1 : 0.9 }}
+          >
+            {[
+              { name: tCommon("home"), href: "/" },
+              { name: tCommon("courses"), href: "/courses" },
+              { name: tCommon("about"), href: "/about" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-full transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </motion.div>
+
+          {/* Right side - Auth & Settings */}
+          <motion.div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+            {status === "loading" ? (
+              <div className="w-24 h-10 bg-muted rounded-full animate-pulse" />
+            ) : session ? (
+              <Link
+                href="/dashboard"
+                className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/20"
+              >
+                {tCommon("dashboard")}
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/auth/signin"
+                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {tCommon("signIn")}
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/20"
+                >
+                  {tCommon("getStarted")}
+                </Link>
+              </>
+            )}
+          </motion.div>
+        </motion.div>
+
+        {/* Mobile Nav */}
+        <motion.div
+          animate={{
+            width: scrolled ? "94%" : "100%",
+            y: scrolled ? 8 : 0,
+            borderRadius: scrolled || mobileMenuOpen ? "20px" : "0px",
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className={cn(
+            "md:hidden flex flex-col mx-auto transition-all duration-300 overflow-hidden",
+            scrolled || mobileMenuOpen
+              ? "bg-background/90 backdrop-blur-xl shadow-lg shadow-foreground/5 border border-border/50"
+              : "bg-background/50 backdrop-blur-md"
+          )}
+        >
+          <div className="flex items-center justify-between px-4 py-3">
+            <Link href="/" className="flex items-center">
+              <Logo width={100} height={40} />
+            </Link>
+            
+            <div className="flex items-center gap-2">
               <LanguageSwitcher />
               <ThemeToggle />
-              {status === "loading" ? (
-                <div className="w-24 h-10 bg-muted rounded-lg animate-pulse" />
-              ) : session ? (
-                <Link
-                  href="/dashboard"
-                  className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
-                >
-                  {tCommon("dashboard")}
-                </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/auth/signin"
-                    className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {tCommon("signIn")}
-                  </Link>
-                  <Link
-                    href="/auth/signup"
-                    className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
-                  >
-                    {tCommon("getStarted")}
-                  </Link>
-                </>
-              )}
-            </motion.div>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-full bg-accent/50 text-foreground"
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </motion.button>
+            </div>
           </div>
-        </div>
-      </nav>
+
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                <div className="px-4 pb-4 space-y-2">
+                  {[
+                    { name: tCommon("home"), href: "/" },
+                    { name: tCommon("courses"), href: "/courses" },
+                    { name: tCommon("about"), href: "/about" },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0, transition: { delay: idx * 0.05 } }}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block px-4 py-2.5 rounded-xl text-foreground hover:bg-accent transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  <div className="w-full h-px bg-border my-2" />
+                  
+                  {status === "loading" ? (
+                    <div className="w-full h-10 bg-muted rounded-xl animate-pulse" />
+                  ) : session ? (
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block w-full px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm text-center"
+                    >
+                      {tCommon("dashboard")}
+                    </Link>
+                  ) : (
+                    <div className="space-y-2">
+                      <Link
+                        href="/auth/signin"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full px-4 py-2.5 rounded-xl border border-border text-foreground font-medium text-sm text-center hover:bg-accent transition-colors"
+                      >
+                        {tCommon("signIn")}
+                      </Link>
+                      <Link
+                        href="/auth/signup"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm text-center"
+                      >
+                        {tCommon("getStarted")}
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </motion.nav>
+
+      {/* Spacer for fixed nav */}
+      <div className="h-20" />
 
       {/* Hero Section */}
       <section className="relative z-10 pt-12 pb-32 overflow-hidden">
@@ -136,7 +281,8 @@ export default function LandingPage() {
               alt=""
               fill
               sizes="45vw"
-              className="object-cover object-[center_15%] dark:mix-blend-screen"
+              className="object-cover object-[center_15%]"
+              style={{ mixBlendMode: 'lighten' }}
               priority
             />
           </div>
@@ -164,7 +310,7 @@ export default function LandingPage() {
                 <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="text-sm font-bold">4.9</span>
+                <span className="text-sm font-bold">5.0</span>
               </div>
             </div>
           </motion.div>
@@ -248,18 +394,18 @@ export default function LandingPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-12"
             >
-              <p className="text-sm text-muted-foreground mb-4">{t("builtWith")}</p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                {trustIndicators.map((tech, i) => (
-                  <motion.span
-                    key={tech.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r ${tech.color} bg-clip-text text-transparent border border-white/10`}
+                {trustIndicatorKeys.map((key, i) => (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
                   >
-                    {tech.name}
-                  </motion.span>
+                    <span className="text-sm font-medium text-primary">{t(`trust.${key}`)}</span>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

@@ -89,7 +89,7 @@ export function Testimonials() {
             <OrbitingAvatars
               centerIcon={
                 <div className="p-6 overflow-hidden z-20 flex flex-col items-center justify-center rounded-2xl border border-border bg-card/80 backdrop-blur-sm shadow-2xl">
-                  <div className="text-4xl font-bold text-primary">4.9</div>
+                  <div className="text-4xl font-bold text-primary">5.0</div>
                   <div className="flex gap-0.5 mt-1">
                     {[...Array(5)].map((_, i) => (
                       <svg key={i} className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">

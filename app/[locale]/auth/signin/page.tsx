@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -9,10 +9,18 @@ import { useTranslations } from "next-intl";
 import { Logo } from "@/components/logo";
 
 export default function SignInPage() {
+  return (
+    <Suspense>
+      <Component />
+    </Suspense>
+  );
+}
+
+function Component() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
-  const error = searchParams.get("error");
+  const callbackUrl = searchParams?.get("callbackUrl") || "/dashboard";
+  const error = searchParams?.get("error");
   const t = useTranslations("auth");
   const tCommon = useTranslations("common");
 
@@ -69,9 +77,7 @@ export default function SignInPage() {
         <div className="glow-card p-8">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">{t("welcomeBack")}</h1>
-            <p className="text-muted-foreground">
-              {t("signInDescription")}
-            </p>
+            <p className="text-muted-foreground">{t("signInDescription")}</p>
           </div>
 
           {errorMessage && (
@@ -157,9 +163,7 @@ export default function SignInPage() {
           </form>
 
           <div className="mt-6 text-center text-sm">
-            <span className="text-muted-foreground">
-              {t("noAccount")}{" "}
-            </span>
+            <span className="text-muted-foreground">{t("noAccount")} </span>
             <Link
               href="/auth/signup"
               className="text-violet-400 hover:text-violet-300 font-medium transition-colors"
@@ -175,8 +179,18 @@ export default function SignInPage() {
             href="/"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
           >
-            <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <svg
+              className="w-4 h-4 rtl:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             {t("backToHome")}
           </Link>
@@ -185,5 +199,3 @@ export default function SignInPage() {
     </div>
   );
 }
-
-
