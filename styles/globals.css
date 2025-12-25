@@ -1,5 +1,8 @@
-@import url("/fonts/stylesheet.css");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Legacy styles for pages directory routes */
+body {
+  @apply antialiased;
+}
