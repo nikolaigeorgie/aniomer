@@ -104,7 +104,7 @@
 
   .glow-card::before {
     content: "";
-    @apply absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500;
+    @apply absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 pointer-events-none;
     background: radial-gradient(
       600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
       hsl(45 30% 75% / 0.12),

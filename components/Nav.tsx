@@ -9,10 +9,10 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useTheme } from "next-themes";
+import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface NavbarProps {
   navItems: {
@@ -70,17 +70,6 @@ const Nav = () => {
 const DesktopNav = ({ navItems, visible }: NavbarProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { data: session } = useSession();
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const logoSrc =
-    mounted && resolvedTheme === "dark"
-      ? "/logo-light-trans.png"
-      : "/logo-dark-trans.png";
 
   return (
     <motion.div
@@ -117,28 +106,7 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
         className="flex-shrink-0"
       >
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative h-10 w-10 overflow-hidden rounded-xl">
-            {mounted && (
-              <Image
-                src={logoSrc}
-                alt="Aniomer"
-                fill
-                className="object-contain"
-                priority
-              />
-            )}
-          </div>
-          <motion.span
-            className="font-cal text-xl tracking-tight text-foreground"
-            animate={{
-              opacity: visible ? 0 : 1,
-              width: visible ? 0 : "auto",
-              marginLeft: visible ? 0 : 0,
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            Aniomer
-          </motion.span>
+          <Logo width={visible ? 100 : 140} height={visible ? 40 : 56} />
         </Link>
       </motion.div>
 
@@ -217,6 +185,7 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
           transition={{ duration: 0.2 }}
           className="flex items-center gap-3"
         >
+          <ThemeToggle />
           {session ? (
             <div className="flex items-center gap-3">
               <motion.div
@@ -260,17 +229,6 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
 const MobileNav = ({ navItems, visible }: NavbarProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const logoSrc =
-    mounted && resolvedTheme === "dark"
-      ? "/logo-light-trans.png"
-      : "/logo-dark-trans.png";
 
   return (
     <>
@@ -301,31 +259,21 @@ const MobileNav = ({ navItems, visible }: NavbarProps) => {
         )}
       >
         <div className="flex flex-row justify-between items-center w-full px-4 py-3">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative h-9 w-9 overflow-hidden rounded-xl">
-              {mounted && (
-                <Image
-                  src={logoSrc}
-                  alt="Aniomer"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              )}
-            </div>
-            <span className="font-cal text-lg tracking-tight text-foreground">
-              Aniomer
-            </span>
+          <Link href="/" className="flex items-center">
+            <Logo width={100} height={40} />
           </Link>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setOpen(!open)}
-            className="p-2 rounded-full bg-accent/50 text-foreground"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </motion.button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setOpen(!open)}
+              className="p-2 rounded-full bg-accent/50 text-foreground"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </motion.button>
+          </div>
         </div>
 
         <AnimatePresence>

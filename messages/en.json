@@ -289,5 +289,125 @@
   "metadata": {
     "title": "Learn Hebrew & English with Aviya | Language Courses",
     "description": "Master Hebrew or English with Aviya's unique video courses. Engaging lessons, real conversation practice, and personalized learning paths. Start your free trial today."
+  },
+  "courses": {
+    "badge": "Premium Language Courses",
+    "title": "Explore Our",
+    "titleHighlight": "Courses",
+    "subtitle": "Choose from our carefully crafted courses designed to take you from beginner to confident speaker. Each course is packed with engaging video lessons and interactive exercises.",
+    "filter": {
+      "all": "All Courses",
+      "hebrew": "Hebrew",
+      "english": "English"
+    },
+    "lesson": "lesson",
+    "lessons": "lessons",
+    "draft": "Coming Soon",
+    "instructor": "Instructor",
+    "empty": {
+      "title": "Courses Coming Soon",
+      "description": "We're preparing amazing courses for you. Sign up to be notified when they launch!",
+      "cta": "Get Notified"
+    },
+    "cta": {
+      "title": "Ready to Start Learning?",
+      "description": "Join hundreds of students who are already on their journey to fluency. Your first lesson is free!",
+      "button": "Start Free Trial"
+    }
+  },
+  "courseDetail": {
+    "lesson": "lesson",
+    "lessons": "lessons",
+    "draft": "Draft",
+    "instructor": "Instructor",
+    "curriculum": "Course Curriculum",
+    "totalTime": "total",
+    "selected": "Now Playing",
+    "yourProgress": "Your Progress",
+    "completed": "completed",
+    "startCourse": "Start Course",
+    "continueWatching": "Continue Watching",
+    "noLessons": "No lessons available",
+    "signInPrompt": "Sign in to track your progress and save your place",
+    "includes": "This course includes",
+    "includesVideo": "High-quality video lessons",
+    "includesLifetime": "Lifetime access",
+    "includesMobile": "Access on mobile and desktop",
+    "includesCertificate": "Certificate of completion",
+    "notFound": {
+      "title": "Course Not Found",
+      "description": "The course you're looking for doesn't exist or has been removed.",
+      "cta": "Browse Courses"
+    }
+  },
+  "about": {
+    "badge": "Meet Your Instructor",
+    "greeting": "Hi, I'm",
+    "name": "Aviya",
+    "intro": "I'm a passionate language teacher with over 6 years of experience helping students achieve fluency in Hebrew and English. My unique approach combines real conversation practice, cultural immersion, and personalized feedback to make language learning effective and enjoyable.",
+    "background": "Born and raised in Israel, I've always been fascinated by the power of language to connect people across cultures. After years of teaching one-on-one, I created this platform to share my methods with students everywhere.",
+    "contact": "Get in Touch",
+    "nativeBadge": "Native Speaker",
+    "stats": {
+      "students": "500+",
+      "studentsLabel": "Happy Students",
+      "lessons": "50+",
+      "lessonsLabel": "Video Lessons",
+      "rating": "5.0 Rating",
+      "ratingLabel": "From 500+ students",
+      "years": "6+",
+      "yearsLabel": "Years Teaching"
+    },
+    "philosophy": {
+      "title": "My Teaching",
+      "highlight": "Philosophy",
+      "subtitle": "I believe everyone can learn a new language. Here's what makes my approach different."
+    },
+    "values": {
+      "passion": {
+        "title": "Passion for Teaching",
+        "description": "I genuinely love helping students succeed. Your progress is my greatest reward."
+      },
+      "conversations": {
+        "title": "Real Conversations",
+        "description": "Forget boring textbooks. We learn through real dialogue, practical situations, and cultural context."
+      },
+      "personalized": {
+        "title": "Personalized Learning",
+        "description": "Every student is unique. I adapt my teaching to your pace, goals, and learning style."
+      },
+      "fun": {
+        "title": "Fun & Engaging",
+        "description": "Learning should be enjoyable! My lessons are designed to keep you motivated and excited."
+      }
+    },
+    "journey": {
+      "title": "My",
+      "highlight": "Journey",
+      "subtitle": "From teaching friends to building a global learning platform."
+    },
+    "milestones": {
+      "started": {
+        "title": "Started Teaching",
+        "description": "Began teaching Hebrew and English to friends and family, discovering a passion for language education."
+      },
+      "online": {
+        "title": "Online Teaching",
+        "description": "Transitioned to online teaching during the pandemic, reaching students worldwide."
+      },
+      "method": {
+        "title": "Method Development",
+        "description": "Developed unique teaching methodology focused on real conversation and practical skills."
+      },
+      "platform": {
+        "title": "Platform Launch",
+        "description": "Launched this platform to share my courses with students everywhere, anytime."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Language Journey?",
+      "description": "Join hundreds of students who've transformed their language skills with my courses. Your first lesson is free!",
+      "button": "Browse Courses"
+    }
   }
 }

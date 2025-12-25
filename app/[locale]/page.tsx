@@ -1,271 +1,132 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { LanguageLearningSelector } from "@/components/language-learning-selector";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { Pricing } from "@/components/Pricing";
 import { InteractiveFeatures } from "@/components/InteractiveFeatures";
-import { Logo } from "@/components/logo";
+import { MarketingLayout } from "@/components/marketing-layout";
 
 const featureIcons = {
   videoStreaming: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+      />
     </svg>
   ),
   security: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+      />
     </svg>
   ),
   performance: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M13 10V3L4 14h7v7l9-11h-7z"
+      />
     </svg>
   ),
   ui: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+      />
     </svg>
   ),
   progress: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+      />
     </svg>
   ),
   customizable: (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+      />
     </svg>
   ),
 };
 
-const featureKeys = ["videoStreaming", "security", "performance", "ui", "progress", "customizable"] as const;
+const featureKeys = [
+  "videoStreaming",
+  "security",
+  "performance",
+  "ui",
+  "progress",
+  "customizable",
+] as const;
 
-const trustIndicatorKeys = ["students", "rating", "lessons", "native", "certified"] as const;
+const trustIndicatorKeys = [
+  "students",
+  "rating",
+  "lessons",
+  "native",
+  "certified",
+] as const;
 
 export default function LandingPage() {
-  const { data: session, status } = useSession();
   const t = useTranslations("landing");
-  const tCommon = useTranslations("common");
   const tFeatures = useTranslations("features");
-  
-  // Scroll detection for navbar transformation
-  const navRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 50);
-  });
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Background effects */}
-      <div className="fixed inset-0 grid-pattern opacity-50" />
-      <div className="hero-glow -top-40 start-[-10rem]" />
-      <div className="hero-glow -bottom-40 end-[-10rem]" />
-
-      {/* Sticky Navigation */}
-      <motion.nav 
-        ref={navRef}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed top-0 inset-x-0 z-50"
-      >
-        {/* Desktop Nav */}
-        <motion.div
-          animate={{
-            width: scrolled ? "90%" : "100%",
-            y: scrolled ? 12 : 0,
-            borderRadius: scrolled ? "9999px" : "0px",
-          }}
-          transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-          className={cn(
-            "hidden md:flex items-center justify-between mx-auto px-6 py-4 transition-all duration-300",
-            scrolled
-              ? "bg-background/85 backdrop-blur-xl shadow-lg shadow-foreground/5 border border-border/50"
-              : "bg-transparent"
-          )}
-        >
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="flex items-center"
-          >
-            <Link href="/" className="flex items-center gap-3">
-              <Logo width={scrolled ? 100 : 140} height={scrolled ? 40 : 56} />
-            </Link>
-          </motion.div>
-
-          {/* Center Nav Links */}
-          <motion.div 
-            className="flex items-center gap-1"
-            animate={{ opacity: scrolled ? 1 : 0.9 }}
-          >
-            {[
-              { name: tCommon("home"), href: "/" },
-              { name: tCommon("courses"), href: "/courses" },
-              { name: tCommon("about"), href: "/about" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-full transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </motion.div>
-
-          {/* Right side - Auth & Settings */}
-          <motion.div className="flex items-center gap-2">
-            <LanguageSwitcher />
-            <ThemeToggle />
-            {status === "loading" ? (
-              <div className="w-24 h-10 bg-muted rounded-full animate-pulse" />
-            ) : session ? (
-              <Link
-                href="/dashboard"
-                className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/20"
-              >
-                {tCommon("dashboard")}
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href="/auth/signin"
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {tCommon("signIn")}
-                </Link>
-                <Link
-                  href="/auth/signup"
-                  className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-all hover:shadow-lg hover:shadow-primary/20"
-                >
-                  {tCommon("getStarted")}
-                </Link>
-              </>
-            )}
-          </motion.div>
-        </motion.div>
-
-        {/* Mobile Nav */}
-        <motion.div
-          animate={{
-            width: scrolled ? "94%" : "100%",
-            y: scrolled ? 8 : 0,
-            borderRadius: scrolled || mobileMenuOpen ? "20px" : "0px",
-          }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={cn(
-            "md:hidden flex flex-col mx-auto transition-all duration-300 overflow-hidden",
-            scrolled || mobileMenuOpen
-              ? "bg-background/90 backdrop-blur-xl shadow-lg shadow-foreground/5 border border-border/50"
-              : "bg-background/50 backdrop-blur-md"
-          )}
-        >
-          <div className="flex items-center justify-between px-4 py-3">
-            <Link href="/" className="flex items-center">
-              <Logo width={100} height={40} />
-            </Link>
-            
-            <div className="flex items-center gap-2">
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-full bg-accent/50 text-foreground"
-              >
-                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </motion.button>
-            </div>
-          </div>
-
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden"
-              >
-                <div className="px-4 pb-4 space-y-2">
-                  {[
-                    { name: tCommon("home"), href: "/" },
-                    { name: tCommon("courses"), href: "/courses" },
-                    { name: tCommon("about"), href: "/about" },
-                  ].map((item, idx) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0, transition: { delay: idx * 0.05 } }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block px-4 py-2.5 rounded-xl text-foreground hover:bg-accent transition-colors"
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  ))}
-                  
-                  <div className="w-full h-px bg-border my-2" />
-                  
-                  {status === "loading" ? (
-                    <div className="w-full h-10 bg-muted rounded-xl animate-pulse" />
-                  ) : session ? (
-                    <Link
-                      href="/dashboard"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block w-full px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm text-center"
-                    >
-                      {tCommon("dashboard")}
-                    </Link>
-                  ) : (
-                    <div className="space-y-2">
-                      <Link
-                        href="/auth/signin"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block w-full px-4 py-2.5 rounded-xl border border-border text-foreground font-medium text-sm text-center hover:bg-accent transition-colors"
-                      >
-                        {tCommon("signIn")}
-                      </Link>
-                      <Link
-                        href="/auth/signup"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block w-full px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm text-center"
-                      >
-                        {tCommon("getStarted")}
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </motion.nav>
-
-      {/* Spacer for fixed nav */}
-      <div className="h-20" />
-
+    <MarketingLayout>
       {/* Hero Section */}
       <section className="relative z-10 pt-12 pb-32 overflow-hidden">
         {/* Instructor Image - Absolute positioned behind content */}
@@ -282,7 +143,7 @@ export default function LandingPage() {
               fill
               sizes="45vw"
               className="object-cover object-[center_15%]"
-              style={{ mixBlendMode: 'lighten' }}
+              style={{ mixBlendMode: "lighten" }}
               priority
             />
           </div>
@@ -292,7 +153,7 @@ export default function LandingPage() {
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
           {/* Bottom fade - smooth and gradual */}
           <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/80 to-transparent" />
-          
+
           {/* Instructor badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -303,11 +164,17 @@ export default function LandingPage() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-medium">{t("instructor.name")}</span>
+                <span className="text-sm font-medium">
+                  {t("instructor.name")}
+                </span>
               </div>
               <div className="w-px h-4 bg-border" />
               <div className="flex items-center gap-1">
-                <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-4 h-4 text-amber-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
                 <span className="text-sm font-bold">5.0</span>
@@ -369,18 +236,34 @@ export default function LandingPage() {
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {t("startCreating")}
-                  <svg className="w-5 h-5 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
                   </svg>
                 </span>
                 <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
 
               <button
-                onClick={() => {/* TODO: Open demo video modal */}}
+                onClick={() => {
+                  /* TODO: Open demo video modal */
+                }}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl border border-border text-foreground font-semibold text-lg hover:bg-muted transition-colors flex items-center justify-center gap-2"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M8 5v14l11-7z" />
                 </svg>
                 {t("viewOnGithub")}
@@ -404,7 +287,9 @@ export default function LandingPage() {
                     whileHover={{ scale: 1.05 }}
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
                   >
-                    <span className="text-sm font-medium text-primary">{t(`trust.${key}`)}</span>
+                    <span className="text-sm font-medium text-primary">
+                      {t(`trust.${key}`)}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -444,7 +329,9 @@ export default function LandingPage() {
                 <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
                   {featureIcons[key]}
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{tFeatures(`${key}.title`)}</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  {tFeatures(`${key}.title`)}
+                </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {tFeatures(`${key}.description`)}
                 </p>
@@ -489,8 +376,18 @@ export default function LandingPage() {
                 href="/auth/signup"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary-foreground text-primary font-semibold text-lg hover:bg-primary-foreground/90 transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
                 {t("createFreeAccount")}
               </Link>
@@ -498,25 +395,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 py-12 border-t border-border">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Logo width={100} height={40} />
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">{t("footer.documentation")}</a>
-              <a href="#" className="hover:text-foreground transition-colors">{t("footer.github")}</a>
-              <a href="#" className="hover:text-foreground transition-colors">{t("footer.support")}</a>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              {t("footer.copyright", { year: new Date().getFullYear() })}
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </MarketingLayout>
   );
 }
-
-
