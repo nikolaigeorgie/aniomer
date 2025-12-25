@@ -2,7 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { type Locale } from "@/i18n/config";
 
 // Flag components

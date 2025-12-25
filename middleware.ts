@@ -16,9 +16,9 @@ export const config = {
   // Match only internationalized pathnames
   matcher: [
     // Match all pathnames except for
-    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … if they start with `/api`, `/_next`, `/_vercel`, `/admin`, or `/courses`
     // - … the ones containing a dot (e.g. `favicon.ico`)
-    "/((?!api|_next|_vercel|.*\\..*).*)",
+    "/((?!api|_next|_vercel|admin|courses|.*\\..*).*)",
   ],
 };
 

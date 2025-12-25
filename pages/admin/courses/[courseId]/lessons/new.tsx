@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const upload = await mux.video.uploads.create({
-    cors_origin: 'https://localhost:3000',
+    cors_origin: process.env.NEXTAUTH_URL || 'http://localhost:3000',
     new_asset_settings: {
       playback_policy: ['public', 'signed'],
       passthrough: JSON.stringify({ userId: session.user?.id })

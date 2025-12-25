@@ -7,7 +7,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useRef, useState } from "react";

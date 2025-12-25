@@ -4,7 +4,7 @@ import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/components/logo";
 
@@ -58,9 +58,9 @@ function Component() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       {/* Background effects */}
-      <div className="fixed inset-0 grid-pattern opacity-50" />
-      <div className="hero-glow -top-40 start-[-10rem]" />
-      <div className="hero-glow -bottom-40 end-[-10rem]" />
+      <div className="fixed inset-0 grid-pattern opacity-50 pointer-events-none" />
+      <div className="hero-glow -top-40 start-[-10rem] pointer-events-none" />
+      <div className="hero-glow -bottom-40 end-[-10rem] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
