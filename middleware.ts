@@ -1,25 +1,58 @@
-import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
 import { locales, defaultLocale } from "./i18n/config";
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales,
+// Password protection cookie name
+const SITE_ACCESS_COOKIE = "site_access_granted";
 
-  // Used when no locale matches
-  defaultLocale,
+// Routes that should be accessible without password
+const publicPaths = ["/password", "/api/auth/site-access"];
 
-  // Don't redirect when locale prefix is missing
-  localePrefix: "as-needed",
-});
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Skip password protection for static files and certain paths
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".") || // files with extensions (favicon.ico, etc)
+    publicPaths.some((path) => pathname.startsWith(path))
+  ) {
+    // For API routes, still check access cookie (except site-access endpoint)
+    if (pathname.startsWith("/api") && !pathname.startsWith("/api/auth/site-access")) {
+      const hasAccess = request.cookies.get(SITE_ACCESS_COOKIE);
+      if (!hasAccess) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+    }
+    return NextResponse.next();
+  }
+
+  // Check for site access cookie
+  const hasAccess = request.cookies.get(SITE_ACCESS_COOKIE);
+
+  if (!hasAccess) {
+    // Redirect to password page
+    const passwordUrl = new URL("/password", request.url);
+    // Store the original URL to redirect back after password entry
+    passwordUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(passwordUrl);
+  }
+
+  // User has access, continue with internationalization middleware
+  const intlMiddleware = createIntlMiddleware({
+    locales,
+    defaultLocale,
+    localePrefix: "as-needed",
+  });
+
+  return intlMiddleware(request);
+}
 
 export const config = {
-  // Match only internationalized pathnames
   matcher: [
-    // Match all pathnames except for
-    // - … if they start with `/api`, `/_next`, `/_vercel`, `/admin`, or `/courses`
-    // - … the ones containing a dot (e.g. `favicon.ico`)
-    "/((?!api|_next|_vercel|admin|courses|.*\\..*).*)",
+    // Match all pathnames except static files
+    "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
-
-
